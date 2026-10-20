@@ -109,7 +109,9 @@ services_list = [{"service_unit" : "str2str_tcp.service", "name" : "main"},
                  {'service_unit' : 'rtkbase_archive.timer', "name" : "archive_timer"},
                  {'service_unit' : 'rtkbase_archive.service', "name" : "archive_service"},
                  {'service_unit' : 'rtkbase_raw2nmea.service', "name" : "raw2nmea"},
-                 {'service_unit' : 'rtkbase_gnss_web_proxy.service', "name": "RTKBase Reverse Proxy for Gnss receiver Web Server"}
+                 {'service_unit' : 'rtkbase_gnss_web_proxy.service', "name": "RTKBase Reverse Proxy for Gnss receiver Web Server"},
+                 {"service_unit" : "str2str_ntrip_C.service", "name" : "ntrip_C"},
+                 {"service_unit" : "str2str_ntrip_D.service", "name" : "ntrip_D"}
                  ]
 
 #Delay before rtkrcv will stop if no user is on status.html page
@@ -458,6 +460,8 @@ def settings_page():
     main_settings.append(gnss_rcv_url.geturl())
     ntrip_A_settings = rtkbaseconfig.get_ntrip_A_settings()
     ntrip_B_settings = rtkbaseconfig.get_ntrip_B_settings()
+    ntrip_C_settings = rtkbaseconfig.get_ntrip_C_settings()
+    ntrip_D_settings = rtkbaseconfig.get_ntrip_D_settings()
     local_ntripc_settings = rtkbaseconfig.get_local_ntripc_settings()
     rtcm_svr_settings = rtkbaseconfig.get_rtcm_svr_settings()
     rtcm_client_settings = rtkbaseconfig.get_rtcm_client_settings()
@@ -469,6 +473,8 @@ def settings_page():
     return render_template("settings.html", main_settings = main_settings,
                                             ntrip_A_settings = ntrip_A_settings,
                                             ntrip_B_settings = ntrip_B_settings,
+                                            ntrip_C_settings = ntrip_C_settings,
+                                            ntrip_D_settings = ntrip_D_settings,
                                             local_ntripc_settings = local_ntripc_settings,
                                             rtcm_svr_settings = rtcm_svr_settings,
                                             rtcm_client_settings = rtcm_client_settings,
@@ -984,11 +990,15 @@ def update_settings(json_msg):
 
         #Restart service if needed
         if source_section == "main":
-            restartServices(("main", "ntrip_A", "ntrip_B", "local_ntrip_caster", "rtcm_svr", "rtcm_client", "rtcm_udp_svr", "rtcm_udp_client", "file", "rtcm_serial", "raw2nmea"))  
+            restartServices(("main", "ntrip_A", "ntrip_B", "ntrip_C", "ntrip_D", "local_ntrip_caster", "rtcm_svr", "rtcm_client", "rtcm_udp_svr", "rtcm_udp_client", "file", "rtcm_serial", "raw2nmea"))
         elif source_section == "ntrip_A":
             restartServices(("ntrip_A",))
         elif source_section == "ntrip_B":
             restartServices(("ntrip_B",))
+        elif source_section == "ntrip_C":
+            restartServices(("ntrip_C",))
+        elif source_section == "ntrip_D":
+            restartServices(("ntrip_D",))
         elif source_section == "local_ntrip_caster":
             restartServices(("local_ntrip_caster",))
         elif source_section == "rtcm_svr":

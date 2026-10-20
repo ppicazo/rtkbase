@@ -110,6 +110,38 @@ rtcm_msg_b='1004,1005(10),1006,1008(10),1012,1019,1020,1033(10),1042,1045,1046,1
 #Receiver dependent options
 ntrip_b_receiver_options=''
 
+[ntrip_C]
+
+# NTRIP C caster options
+
+#ntrip C caster url
+svr_addr_c='caster.centipede.fr'
+#ntrip C caster port
+svr_port_c='2101'
+#ntrip C caster password
+svr_pwd_c=''
+#Mount name
+mnt_name_c='Your_mount_name'
+rtcm_msg_c='1004,1005(10),1006,1008(10),1012,1019,1020,1033(10),1042,1045,1046,1077,1087,1097,1107,1127,1230'
+#Receiver dependent options
+ntrip_c_receiver_options=''
+
+[ntrip_D]
+
+# NTRIP D caster options
+
+#ntrip D caster url
+svr_addr_d='caster.centipede.fr'
+#ntrip D caster port
+svr_port_d='2101'
+#ntrip D caster password
+svr_pwd_d=''
+#Mount name
+mnt_name_d='Your_mount_name'
+rtcm_msg_d='1004,1005(10),1006,1008(10),1012,1019,1020,1033(10),1042,1045,1046,1077,1087,1097,1107,1127,1230'
+#Receiver dependent options
+ntrip_d_receiver_options=''
+
 [local_ntrip_caster]
 
 # local NTRIP caster options
